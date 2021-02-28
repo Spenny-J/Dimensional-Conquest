@@ -1,0 +1,14 @@
+This is a system to control a blade (of light) from my dreams.
+Simply put we want to slice, throw, activate, deactivate, and control fun audio.
+
+Key Features:
+* Throwing
+* Activation/Deactivation
+* Slicing
+* Reflection
+* Sound effects
+
+ Activation/Deactivation
+	[X] * A script that is called to activate and control the extension of a lightsaber blade
+	[X] * Function in script above to deactivate
+	* Deactivate once dropped on ground

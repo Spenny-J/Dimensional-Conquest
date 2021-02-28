@@ -1,0 +1,96 @@
+This is a system of tools I want to create to give my player some smooth good feeling during play.
+For now I have a good place to start for my Jedi player controller to have in VR.
+Anything new will be written under the Parkour section
+
+Key Features:
+* Player Controller Manager
+[X] * Analog movement (with walking support)
+[X] * Jumping
+[_] * Grabbing
+[X] * Force Manipulate (1 object)
+[_] * Massive Force Push/Pull
+[X] * Physics body (everything) (I believe this is done)
+[X] * Parkour (This needs to be expounded upon)
+* Investigate the steam_VR treadmill support
+
+[X] Player Library to keep movements such as the movment type (HMD, Right Controller, Left Controller)
+
+Player Controller Manager
+This will be used to keep track of what the hell we are doing with each controller and so we can customize our settings to be a bit not so tight
+* Keep track if hand is force grabbing an object
+* Keep track if hand is grabbing an object
+* Just make the grabbing object public as well as the force grabbed object
+* Manage movement method
+[X] * Hand manager (Track if hand is doing anything)
+
+Analog Movement
+Just move using a thumbpad essentially, this should support my new VR treadmill just fine
+[X] - Use X-input to move forward, back, left, and right
+[X] - Create library to hold any control enums
+[X] - Use input from the VR controller to control the player
+- Create a manager where this field can be edited in game
+- Save this data on the system
+
+ [X] Jumping
+	Just add the functionality to jump
+	* May want to look at what they used for Mario and try that out and see how it feels in VR
+	* Just a button to jump when touching the ground
+	[X] - Jump using keyboard input
+	[X] - Jump using VR controller input
+
+ Grabbing
+	I want to grab objects
+	* Detect when my hand is near an object and grab it, disable the hand object
+	* Parent the object to the hand
+	[X] * Is grabbable script
+	[X] - Grab object script
+	[X] - Can grab any object in layermask
+	- GrabbableObj script for:
+		[X] * Can see if already grabbed by a hand (Grab/Force grab)
+		[X] * Can see if second hand is grabbing (Grab/Force grab)
+		[X] * [Force Grab] Function to pass in the Vector from hands
+		[X] - 2 vector values then we take the midpoint if each vector != null
+		[X] - Can tell if held by 1 or both hands
+		[X] - If held with both we want to double the force amount
+		[X] - If held with both we want to center the object halfway in between the force position we originally set
+		[X] * Event for using the object (pulling trigger or other button)
+	- If 1 hand already grabbing object, use second hand grabbing for rotation
+		* Specifically quarternion look rotation (or opposite for melee weapons)
+
+Force Manipulate (1 obj)
+Similar to half life alyx we want to: 
+	[X] * highlight an object
+	[X] * Grab the highlighted object once user closes hand
+	[X] * Change objects position by an offset
+	[X] * If user yanks hand back we pull the object toward their head
+	[X] * If user jolts hand forward we throw object away from head
+	[X] - Can grab 1 object with both hands
+	- Change object position (closer/further from player based on rotation of hand)
+	- Change object rotation (based on force grabbing with other hand)
+	- Add velocity when grabbing with 1 hand
+	* If user yanks back on usuable items (lightsaber/guns/etc) it will do the half life alyx thing
+Work in progress
+
+Massive Force Push/Pull (all objects)
+Will want to create a "magic system" similar to Forces system. I would like it to be gesture based, and use a velocity value.
+Similar to what we have used before.
+	//* Force push all objects in front of head/hand in a cone
+	//* Force pull all objects in front of head/hand in a cone
+	[X] - Force Gesture Manager
+	  [X] * Events for activating different force abilities (Up/down, left/right, forward/back)
+	- Force Abilities LIbrary
+	  * Force push all objects in front of me
+	  * Force pull all objects in front of me
+	  * Force throw all objects to the sides
+	[X] - Force Gesture Hand
+	  
+
+
+Parkour:
+I can jump around grab on to objects to get to areas I thought I could not get to previously.
+Take a look at stride for good examples.
+[X] - Grab onto a ledge or other object to move about.
+    [X] * When I grab onto an object I want to move the entire playspace
+	[X] * On grab the player collider super small so I can move myself onto that object
+	[X] * On release reset the size of the collider
+- Ability to jump that doesn't make other people feel sick

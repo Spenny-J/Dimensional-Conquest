@@ -1,0 +1,195 @@
+TODO:
+(In Progress) AI controller
+(In Progress) Move Script
+Cover research
+Attack
+
+This Demo is supposed to take a look at AI. This can includ anything at this rate. 
+
+Things that would be fun to do:
+- AI controller to control different objects/behaviors
+- Moving to an objective or goal
+- Roaming
+- Moving around a dedicated path
+- Creating a goal, accomplishing goal on the fly
+- Melee combat with a VR player
+- Ranged combat with a vr player
+- Movement
+- Gaurding
+- Personal ID
+
+AI controller:
+Main controller that decides what the AI's main behavior is.
+Main behaviors:
+- [X] Roaming
+- Gaurding/Defense
+- Move to Objective (Pass in an objective and change to gaurd as default or idle)
+- [X] Basic attack
+- Attack
+
+[X] Basic Attack:
+- Use detect player to attack using preferences in script
+- Melee attack use movment as defined in (move)
+(TODO) Feed target to AI Controller script that hasn't been constructed yet
+
+Cover system:
+- Similar to detect target
+- Find available cover spots.
+- Find available angles?
+(Watch tutorial on how to make this)
+- Function that says run to cover(?)
+	 Thick cover (Can't shoot through), Closest
+	 Feed move target to AI controller script
+	 IF at target, crouch or take cover
+
+Attack:
+	- Basic attack behaviors that weapons will fall under
+	* Guns
+		Shotguns
+			Behavior is get close to target.
+			Still fire at target but get closer.
+			Take cover when needing to reload if cover is near.
+		Sniper
+			Have a larger sense of detect player.
+			Attempt to fire at target at distance.
+			If close to target attempt to switch weapon or flee from target.
+		Assault
+			Have the basic detect target.
+			Fire at target if available.
+
+Move:(? Is this necessary)
+- Move to target
+- Rotate toward target
+What should be priorites here? (Run(Cover script or run away from enemy) -> Attack -> Goal)
+	if(survivalistTarget != null)
+	{
+		//Move to Survalist Target set by cover script or self preservation script
+		//We are going to grab this object from the AI controller if not null
+		return;
+	}
+	if(AttackTarget != null)
+	{
+		//Move to attack target set by the attack scripts
+		//We are going to grab this object from the AI controller if not null
+		return;
+	}
+	if(GoalTarget != null)
+	{
+		//Move to goal target
+		//We are going to grab this object from the AI controller if not null
+		return;
+	}
+	else{
+		//Lets use the Roam script as placeholder for doing something when there aren't the other scripts there.
+	}
+When target is used this is literally talking about going to a position in 3D space.	
+Pros to Move:
+- Universal for AI (Enemies, friendlies, civilians)
+- Can include how to (Jumping, Moving to cover, climbing)
+
+
+Idea:
+AI behavior
+- Main behavior
+The main behavior is going to be what their main purpose is.
+- Needs
+This is going to be food/water/boredom
+- Interests
+Can be distracted like a dog or aided in some way.
+
+Lets say there's a gaurd well gaurding something. You cause some ruckus.
+Likely the AI is bored, the event peaked it's interest enough.
+Decides to leave to satiate the boredom need.
+
+
+Battle AI (Literally run and die against other AI units)
+If not seeing an enemy don't attack
+Seperate scripts for
+- [X] Detecting an enemy
+	* This is using a child object as a detection trigger
+	* Want to raycast to any objects with a valid tag to check if it's in view
+- [X] Attacking an enemy (melee)
+	* Attacking preference between (WeakestEnemy, ClosestEnemy, StrongestEnemy)
+	* Attacking style between (Engage till dead, Engage on hurt, Engage closest)
+- [X] Health
+
+
+[X] ID
+	This is what we want to use to store all relevant information that is used for the player and AI
+	- First name
+	- Last name
+	- Age/date of birth if there is an established universe
+	- Faction of affiliation (Or team to simply put it)
+	- Meta data (Player, AI, Story NPC, Companion, Law Enforcement, Bandit)
+
+Personalities
+	Want to use this to define how a AI chooses to be an AI. 
+	This was an initial idea I had a few years ago but I would love to fully 
+	flush it out as I'm learning more and more about AI.
+- Idea 1:
+	We could either base this off of DnD character sheets.
+- Idea 2:
+	Base it off of percentages likely to do something.
+	This means all actions will have to have some sort of value for likelyness to do.
+- Idea 3:
+	Similar to Idea 3. We give the AI percentages in fields that depict their personality.
+	We take the action from 1 end to another and determine the extremes. 
+	Percentages will determine whether the AI does the action at all, and what quality and priority
+	the action is done in.
+	If the AI is in middle of an action, it decides it's done with the current action it can decide to 
+	do a different action if that action has more priority.
+
+AI controller:
+	We want to use this to be our sort of brain for our AI. 
+- Main Action
+	What the AI will start doing and continue to do if interrupted.
+	This would consist of gathering materials, guarding, or performing a specific job.
+	As I want things to become more complex I want to make things more fluid, and not so sim type of AI.
+- Response Action
+	How AI will respond to being attacked (Fight or flight).
+	IF flight they will attract friendlys in the direction they ran from.
+
+
+Complex AI:
+These AI should live their own life to a degree.
+They should start out at a life status (Middle class, Royalty, poverty, etc.)
+While these AI are generated depending on the point of life they are at they should want to progress.
+AI such as homeless, will be more focused on simple survival.
+There goal at life will determine what this AI does to progress.
+With the AI having their main goal, there will be sub goals to obtain the main goal.
+I would like to not only have the main goal but have the natural being goals. (Having a family, being part of a community, drinking or thrill seeking)
+-Idea 1:
+	All AI have a base value that they want to protect. 
+	Their goals, functions, and actions will change depending on what this value is.
+	A good example for this would be Health. 
+	While Health is high, depending on the AI's life at that point they proceed to move up (Attempting goals)
+	While Health is low, AI will focus on surviving only (Attaining food, Defending self, attacking for resources, etc.)
+	While Health is mid range, AI may not attempt to focus on goals or survival but to improve health. (Needs more work)
+	-Idea 1a:
+		Health will receive a slow decay over time. AI can exercise to slow decay.
+		To replenish health AI must eat or take a health potion.
+- Idea 2: (Some aspects may be impacted by Idea 1)
+	AI will have specific goals such as improve Health to 100 (Fitness)
+	Attain spiritual enligntenment (Not sure about this one)
+	AI may decide to set a goal to become extremely wealthy.
+	Or become loved by everyone.
+	Or become hated by everyone.
+	These will be the main driving goals by the AI.
+	AI will do things in relationship to this goal. To gain more money it's possible this AI will attempt to own a shop or bar.
+- Idea 3:
+	Have core values to determine where an AI is reletive to goal.
+	- Health
+	- Spiritual
+	- Social
+	Depending on goal this will depend on how an AI lives.
+- Idea 4:
+	If an AI wants to own a bar or shop they will need a few things.
+	1. Own some land, own a building, or rent either. (If there is no building, it will have to be built and this will be the AI's goal.)
+	2. Obtain supplies (Booze, things to sell)
+	3. Demand (Can pay rent or taxes)
+- Idea 5:
+	AI will have a main goal but they will always have survival goals.
+	If the AI is attempting to be an adventurer or hero, to survive they will need food either by paying for it hunting.
+	This could also be a value based on skill, and if there are available things to hunt.
+	IF the AI has money and they are near by a trader or person they can buy food goods.
+
