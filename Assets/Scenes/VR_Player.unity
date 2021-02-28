@@ -1040,7 +1040,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   InteractableLayer:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 2048
   ForcePushAmount: 30
   ForcePushBoxSize: {x: 2, y: 5, z: 40}
   ForceWavePushAmount: 30
