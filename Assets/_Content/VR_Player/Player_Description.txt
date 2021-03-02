@@ -79,7 +79,7 @@ Similar to what we have used before.
 	[X] - Force Gesture Manager
 	  [X] * Events for activating different force abilities (Up/down, left/right, forward/back)
 	- Force Abilities LIbrary
-	  * Force push all objects in front of me
+	  [X] * Force push all objects in front of me
 	  * Force pull all objects in front of me
 	  * Force throw all objects to the sides
 	[X] - Force Gesture Hand
